@@ -868,6 +868,548 @@ body {
 
 .evidence-hidden p { font-style: italic; }
 
+/* ============================
+   Monetization Panel
+   ============================ */
+.monetization-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.monetization-panel .panel-header {
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.monetization-panel .panel-header h3 {
+  font-size: 15px;
+  color: var(--accent-gold);
+}
+
+.monet-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  text-align: left;
+  transition: var(--transition);
+}
+
+.monet-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+}
+
+.monet-card-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.monet-card-body {
+  flex: 1;
+}
+
+.monet-card-body h4 {
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+.monet-card-body p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.btn-monet {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-ui);
+  border: 1px solid;
+}
+
+.btn-redeem {
+  background: transparent;
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.btn-redeem:hover {
+  background: rgba(201, 168, 76, 0.1);
+}
+
+.btn-donate {
+  background: transparent;
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+.btn-donate:hover {
+  background: rgba(192, 57, 43, 0.1);
+}
+
+.btn-custom {
+  background: transparent;
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.btn-custom:hover {
+  background: rgba(44, 107, 158, 0.1);
+}
+
+.premium-card {
+  border-color: var(--accent-gold-dim);
+  background: rgba(201, 168, 76, 0.05);
+}
+
+.premium-badge {
+  display: inline-block;
+  background: var(--accent-green);
+  color: white;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.upgrade-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Stats */
+.stats-grid {
+  display: flex;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-gold-light);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.stats-card {
+  cursor: default;
+}
+
+/* ============================
+   Paywall Modal
+   ============================ */
+.paywall-modal {
+  text-align: center;
+  padding: 40px 30px !important;
+}
+
+.paywall-icon {
+  font-size: 64px;
+  margin-bottom: 15px;
+}
+
+.paywall-modal h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: var(--accent-gold-light);
+}
+
+.paywall-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.paywall-stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 25px;
+}
+
+.paywall-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.paywall-stat .stat-num {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent-gold-light);
+}
+
+.paywall-stat span:last-child {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.paywall-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.btn-back-menu {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: var(--font-ui);
+}
+
+.btn-back-menu:hover {
+  color: var(--text-secondary);
+}
+
+/* ============================
+   Redeem Modal
+   ============================ */
+.redeem-hint {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 10px 0 15px;
+  line-height: 1.5;
+}
+
+.redeem-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.redeem-input {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 16px;
+  color: var(--text-primary);
+  font-family: monospace;
+  letter-spacing: 2px;
+  outline: none;
+  transition: var(--transition);
+}
+
+.redeem-input:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.2);
+}
+
+.redeem-input::placeholder {
+  font-size: 13px;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}
+
+.redeem-result {
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-bottom: 10px;
+  display: none;
+}
+
+.result-success {
+  display: block !important;
+  background: rgba(39, 174, 96, 0.15);
+  color: var(--accent-green);
+  border: 1px solid rgba(39, 174, 96, 0.3);
+}
+
+.result-error {
+  display: block !important;
+  background: rgba(192, 57, 43, 0.15);
+  color: var(--accent-red);
+  border: 1px solid rgba(192, 57, 43, 0.3);
+}
+
+.redeem-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 15px;
+  text-align: center;
+}
+
+.redeem-footer p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+/* ============================
+   Donate Modal
+   ============================ */
+.donate-hint {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 10px 0 20px;
+}
+
+.qr-section {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.qr-placeholder {
+  text-align: center;
+  flex: 1;
+  min-width: 160px;
+  max-width: 220px;
+}
+
+.qr-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.qr-placeholder p {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.qr-box {
+  width: 160px;
+  height: 160px;
+  background: white;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  cursor: pointer;
+  border: 2px dashed var(--border-color);
+  transition: var(--transition);
+}
+
+.qr-box:hover {
+  border-color: var(--accent-gold);
+}
+
+.qr-placeholder-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.qr-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.donate-thanks {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.donate-thanks p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.donate-note {
+  font-size: 12px !important;
+  color: var(--accent-gold);
+}
+
+/* ============================
+   Custom Service Modal
+   ============================ */
+.custom-body p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.custom-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.custom-feat {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--bg-secondary);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+}
+
+.custom-feat > span { font-size: 24px; }
+
+.custom-feat strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.custom-feat p {
+  font-size: 12px !important;
+  margin-bottom: 0 !important;
+}
+
+.custom-cta {
+  text-align: center;
+  background: var(--bg-secondary);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.custom-cta p {
+  font-size: 16px !important;
+  font-weight: 600;
+  color: var(--accent-gold) !important;
+  margin-bottom: 10px !important;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.contact-info span {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.contact-note {
+  font-size: 11px !important;
+  color: var(--text-muted) !important;
+  font-weight: 400 !important;
+}
+
+/* ============================
+   Admin Panel
+   ============================ */
+.admin-body p {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.admin-stat {
+  margin-bottom: 15px;
+}
+
+.admin-stat p {
+  font-size: 13px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.codes-display {
+  margin-top: 10px;
+}
+
+.codes-display p {
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: var(--accent-green);
+}
+
+.codes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.codes-list code {
+  background: var(--bg-primary);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  font-family: monospace;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--accent-gold-light);
+  border: 1px solid var(--border-color);
+  user-select: all;
+}
+
+.codes-tip {
+  font-size: 12px !important;
+  color: var(--text-muted) !important;
+  margin-top: 8px !important;
+}
+
+/* ============================
+   Donation Prompt (verdict)
+   ============================ */
+.donation-prompt {
+  margin-top: 15px;
+}
+
+.donation-content {
+  text-align: center;
+  padding: 15px 0;
+}
+
+.donation-content p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.donation-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.donation-btns .btn-secondary {
+  padding: 8px 20px;
+  font-size: 13px;
+}
+
+.donation-btns .btn-secondary:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
 .empty-state {
   text-align: center;
   padding: 30px;
