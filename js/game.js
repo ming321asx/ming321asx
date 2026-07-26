@@ -2,7 +2,7 @@
 // 游戏主逻辑 - 迷雾侦探
 // ============================
 const Game = {
-  state: 'menu', // menu | briefing | investigation | interrogation | accusation | verdict
+  state: 'menu',
   currentCase: null,
   currentPhase: 'menu',
   foundEvidence: [],
@@ -15,6 +15,11 @@ const Game = {
   accusationResult: null,
 
   startNewGame(difficulty) {
+    if (!Monetization.canPlay()) {
+      UI.renderPaywall();
+      return;
+    }
+    Monetization.incrementTotalGames();
     this.currentCase = CaseGenerator.generate(difficulty);
     this.foundEvidence = [];
     this.interrogatedSuspects = [];
@@ -24,6 +29,7 @@ const Game = {
     this.accusedSuspectId = null;
     this.accusationResult = null;
     this.currentPhase = 'briefing';
+    Monetization.incrementCasesPlayed();
     UI.renderBriefing(this.currentCase);
   },
 
@@ -66,7 +72,7 @@ const Game = {
       this.score += evidenceBonus + stepBonus;
       this.accusationResult = {
         correct: true,
-        message: `恭喜！你的推理完全正确！凶手就是${suspect.name}！`,
+        message: '恭喜！你的推理完全正确！凶手就是' + suspect.name + '！',
         evidenceFound: keyFound,
         totalEvidence: totalKey,
         score: this.score,
@@ -77,11 +83,12 @@ const Game = {
       const realKiller = this.currentCase.suspects.find(s => s.id === this.currentCase.solution.culpritId);
       this.accusationResult = {
         correct: false,
-        message: `错了！${suspect.name}并不是凶手。真正的凶手是${realKiller.name}。`,
+        message: '错了！' + suspect.name + '并不是凶手。真正的凶手是' + realKiller.name + '。',
         score: this.score,
         story: this.currentCase.solution.story
       };
     }
+    Monetization.updateHighScore(this.score);
     UI.renderVerdict(this.accusationResult, this.currentCase);
   },
 
@@ -97,6 +104,10 @@ const Game = {
   },
 
   nextCase() {
+    if (!Monetization.canPlay()) {
+      UI.renderPaywall();
+      return;
+    }
     this.startNewGame(Math.min(3, this.currentCase.difficulty + 1));
   },
 
