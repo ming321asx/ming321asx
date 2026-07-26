@@ -23,13 +23,19 @@ const UI = {
       const btn = e.target.closest('[data-action]');
       if (!btn) return;
       const action = btn.dataset.action;
-      if (action === 'start-game') Game.startNewGame(parseInt(btn.dataset.difficulty) || 1);
+      if (action === 'start-game') {
+        if (!Monetization.canPlay()) { this.renderPaywall(); return; }
+        Game.startNewGame(parseInt(btn.dataset.difficulty) || 1);
+      }
       else if (action === 'visit-location') Game.visitLocation(btn.dataset.locationId);
       else if (action === 'interrogate') Game.interrogateSuspect(btn.dataset.suspectId);
       else if (action === 'accuse') Game.makeAccusation(btn.dataset.suspectId);
       else if (action === 'next-case') Game.nextCase();
       else if (action === 'back-menu') { Game.currentPhase = 'menu'; this.renderMenu(); }
       else if (action === 'back-investigation') UI.renderInvestigation(Game.currentCase, Game.foundEvidence, Game.visitedLocations);
+      else if (action === 'show-redeem') Monetization.showRedeemModal();
+      else if (action === 'show-donate') Monetization.showDonateModal();
+      else if (action === 'show-custom') Monetization.showCustomServiceModal();
       else if (action === 'show-evidence') this._showEvidencePanel();
       else if (action === 'show-suspects') this._showSuspectsPanel();
       else if (action === 'select-evidence') this._selectEvidence(btn.dataset.evidenceId, btn.dataset.suspectId);
@@ -70,13 +76,7 @@ const UI = {
             </div>
           </div>
           <div class="menu-footer">
-            <p>游戏特点</p>
-            <div class="features">
-              <span>🔍 程序化生成案件</span>
-              <span>🗣️ 审问嫌疑人</span>
-              <span>📋 收集关键证据</span>
-              <span>🏆 推理评分系统</span>
-            </div>
+            ${Monetization.renderMonetizationPanel()}
           </div>
         </div>
       </div>
@@ -364,6 +364,7 @@ const UI = {
             <button class="btn-primary" data-action="next-case">下一案件</button>
             <button class="btn-secondary" data-action="back-menu">返回主菜单</button>
           </div>
+          ${Monetization.renderDonationPrompt()}
         </div>
       </div>
     `;
@@ -416,7 +417,51 @@ const UI = {
   },
 
   _selectEvidence(evidenceId, suspectId) {},
-  _submitAccusation(suspectId) {}
+  _submitAccusation(suspectId) {},
+
+  renderPaywall() {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `
+      <div class="modal-content paywall-modal">
+        <div class="paywall-icon">🔒</div>
+        <h2>免费案件已用尽</h2>
+        <p class="paywall-text">你已经完成了 ${Monetization.FREE_CASE_LIMIT} 个免费案件的调查。<br>解锁高级版后可以无限畅玩所有案件！</p>
+        <div class="paywall-stats">
+          <div class="paywall-stat">
+            <span class="stat-num">${Monetization.getTotalGames()}</span>
+            <span>案件完成</span>
+          </div>
+          <div class="paywall-stat">
+            <span class="stat-num">${Monetization.getHighScore()}</span>
+            <span>最高评分</span>
+          </div>
+        </div>
+        <div class="paywall-actions">
+          <button class="btn-primary" data-action="show-redeem">🔓 输入激活码</button>
+          <button class="btn-secondary" data-action="show-donate">☕ 打赏获取</button>
+        </div>
+        <button class="btn-back-menu" data-action="back-menu">返回主菜单</button>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.remove();
+    });
+    overlay.querySelector('[data-action="back-menu"]').addEventListener('click', () => {
+      overlay.remove();
+      this.renderMenu();
+    });
+    // 重新绑定按钮事件
+    overlay.querySelector('[data-action="show-redeem"]').addEventListener('click', () => {
+      overlay.remove();
+      Monetization.showRedeemModal();
+    });
+    overlay.querySelector('[data-action="show-donate"]').addEventListener('click', () => {
+      overlay.remove();
+      Monetization.showDonateModal();
+    });
+  }
 };
 
 // 启动游戏
